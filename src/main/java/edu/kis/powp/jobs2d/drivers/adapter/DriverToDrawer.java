@@ -32,11 +32,10 @@ public class DriverToDrawer extends DrawPanelController implements Job2dDriver {
 		line.setEndCoordinates(x, y);
 		setPosition(x,y);
 		DrawerFeature.getDrawerController().drawLine(line);
-		drawLine(line);
 	}
 
 	@Override
 	public String toString() {
-		return "@Q!$!@$!#@$(*#@&Q(%^*#@";
+		return "Buggy Simulator";
 	}
 }

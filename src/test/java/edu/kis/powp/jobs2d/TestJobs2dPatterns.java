@@ -11,6 +11,7 @@ import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.drivers.adapter.DriverToDrawer;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
+import edu.kis.powp.jobs2d.events.SelectTestFigureOptionSecond;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.powp.jobs2d.features.DriverFeature;
 import edu.kis.powp.jobs2d.magicpresets.FiguresJoe;
@@ -26,13 +27,7 @@ public class TestJobs2dPatterns {
 	private static void setupPresetTests(Application application) {
 		SelectTestFigureOptionListener selectTestFigureOptionListener = new SelectTestFigureOptionListener(
 				DriverFeature.getDriverManager());
-		SelectTestFigureOptionListener selectTestFigureOptionListener2 = new SelectTestFigureOptionListener(DriverFeature.getDriverManager()){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FiguresJoe.figureScript2(DriverFeature.getDriverManager().getCurrentDriver());
-			}
-		};
+		SelectTestFigureOptionSecond selectTestFigureOptionListener2 = new SelectTestFigureOptionSecond(DriverFeature.getDriverManager());
 
 
 		application.addTest("Figure Joe 1", selectTestFigureOptionListener);
@@ -63,8 +58,8 @@ public class TestJobs2dPatterns {
 	private static void setupDefaultDrawerVisibilityManagement(Application application) {
 		DefaultDrawerFrame defaultDrawerWindow = DefaultDrawerFrame.getDefaultDrawerFrame();
 		application.addComponentMenuElementWithCheckBox(DrawPanelController.class, "Default Drawer Visibility",
-				new SelectChangeVisibleOptionListener(defaultDrawerWindow), true);
-		defaultDrawerWindow.setVisible(true);
+				new SelectChangeVisibleOptionListener(defaultDrawerWindow), false);
+		defaultDrawerWindow.setVisible(false);
 	}
 
 	/**
