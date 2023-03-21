@@ -8,28 +8,32 @@ import edu.kis.powp.jobs2d.features.DrawerFeature;
 
 public class LineDrawerAdapter extends DrawPanelController implements Job2dDriver {
     private int startX = 0, startY = 0;
+    private ILine lineDefault = LineFactory.getSpecialLine();
     @Override
-    public void setPosition(int i, int i1) {
-        this.startX = i;
-        this.startY = i1;
+    public void setPosition(int x, int y) {
+        this.startX = x;
+        this.startY = y;
     }
     public LineDrawerAdapter(){
         super();
     }
 
     @Override
-    public void operateTo(int i, int i1) {
+    public void operateTo(int x, int y) {
 
-        ILine line = LineFactory.getSpecialLine();
-        line.setStartCoordinates(this.startX, this.startY);
-        line.setEndCoordinates(i, i1);
-        setPosition(i, i1);
-        DrawerFeature.getDrawerController().drawLine(line);
+
+        lineDefault.setStartCoordinates(this.startX, this.startY);
+        lineDefault.setEndCoordinates(x, y);
+        setPosition(x, y);
+        DrawerFeature.getDrawerController().drawLine(lineDefault);
 
     }
 
     @Override
     public String toString() {
         return "Line Drawer Adapter";
+    }
+    public void changeTypeOfLine(ILine line){
+        this.lineDefault = line;
     }
 }

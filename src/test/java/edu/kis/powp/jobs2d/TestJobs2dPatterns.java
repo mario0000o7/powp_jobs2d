@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
+import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.drivers.adapter.DriverToDrawer;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
@@ -15,6 +16,8 @@ import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionSecond;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.powp.jobs2d.features.DriverFeature;
+
+
 
 public class TestJobs2dPatterns {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -47,8 +50,10 @@ public class TestJobs2dPatterns {
 		Job2dDriver testDriver = new DriverToDrawer();
 		DriverFeature.addDriver("Buggy Simulator", testDriver);
 
-		Job2dDriver LineDrawerAdapter = new LineDrawerAdapter();
-		DriverFeature.addDriver("Line Drawer Adapter", LineDrawerAdapter);
+		LineDrawerAdapter lineDrawerAdapter = new LineDrawerAdapter();
+		DriverFeature.addDriver("Line Drawer Adapter", lineDrawerAdapter);
+		setupLineDrawer(application,lineDrawerAdapter);
+
 
 		DriverFeature.updateDriverInfo();
 	}
@@ -82,6 +87,13 @@ public class TestJobs2dPatterns {
 				(ActionEvent e) -> logger.setLevel(Level.SEVERE));
 		application.addComponentMenuElement(Logger.class, "OFF logging", (ActionEvent e) -> logger.setLevel(Level.OFF));
 	}
+	private static void setupLineDrawer(Application application,LineDrawerAdapter lineDrawer) {
+		application.addComponentMenu(LineDrawerAdapter.class, "Line Drawer", 0);
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Basic Line", (ActionEvent e) -> lineDrawer.changeTypeOfLine(LineFactory.getBasicLine()));
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Dotted Line", (ActionEvent e) -> lineDrawer.changeTypeOfLine(LineFactory.getDottedLine()));
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Special Line", (ActionEvent e) -> lineDrawer.changeTypeOfLine(LineFactory.getSpecialLine()));
+	}
+
 
 	/**
 	 * Launch the application.
